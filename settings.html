@@ -2,28 +2,37 @@
 <html lang="en">
 
 <head>
-	<title>3420 Final</title>
+	<title>Settings</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="css/settings.css">
+	<link rel="stylesheet" href="css/general_styles.css">
 </head>
 
 <body>
-	<div class="next-page">
-		<a href="home.html">Home</a>
-	</div>
-	<div class="main-menu" id="navbar">
-		<a href="profile.html">Profile</a>
-		<a href="calendar.html">Calendar</a>
-		<a href="tasklist.html">Task List</a>
-		<a href="reminders.html">Reminders</a>
-		<a href="community.html">Community</a>
-		<a href="settings.html" class="active">Settings</a>
-		<a href="logout.html">Log Out</a>
-	</div>
-	<div class="username">
-		<h1>Username</h1>
-	</div>
+	<header>
+		<div>
+			<a href="splash_page.html">
+				<img src="./images/bucket_logo.png" width="150" height="150" alt="Bucket List Website Logo">
+			</a>
+		</div>
+		<div>
+			<h1>USERNAME</h1>
+		</div>
+		<div>
+			<form id="searchprofiles" action="#" method="post">
+				<input id="searchbar" type="text" placeholder="Search Profiles...">
+			</form>
+		</div>
+		<div>
+			<nav>
+				<a href="profile.html">Profile</a>
+				<a href="settings.html" class="active">Settings</a>
+				<a href="logout.html">Log Out</a>
+			</nav>
+		</div>
+	</header>
+
 	<form id="editaccount" action="#" method="post" enctype="multipart/form-data">
 		<div>
 			<!--Try to have the placeholder be whatever the user's current username is-->

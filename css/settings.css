@@ -1,113 +1,90 @@
 @import url('https://fonts.googleapis.com/css?family=Arvo&display=swap');
 
-body {
-  background-image: url("../images/background.jpg");
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-size: cover;
-  font-family: 'Arvo', serif;
+header {
+    display: flex;
+    flex-direction: row;
+    align-content: space-between;
+    background-color: grey;
+    margin-top: auto;
+    margin-bottom: auto;
+    border-radius: 10px;
 }
 
-.next-page {
-  background-color: #B2B2B2;
-  box-shadow: 0 0 15px 1px rgba(37, 73, 214, 0.18);
-  overflow: hidden;
-  border-radius: 30px;
-  width: 10%;
-  margin: auto;
+#searchbar {
+    font-size: 25px;
+    width: 200px;
+}
+
+nav {
+    display: flex;
+    flex-direction: row;
 }
 
 /* Setting tabs within next-page box to be on the right side. */
 a {
-  text-align: center;
-  display: block;
-  color: white;
-  font-size: 26px;
-  font-weight: bold;
-  text-decoration: none;
-  border-radius: 25px;
+    text-align: center;
+    display: block;
+    font-size: 26px;
+    font-weight: bold;
+    text-decoration: none;
+    border-radius: 25px;
 }
+
+a {}
 
 /* Changing colour of tabs when hovered over. */
-.next-page a:hover {
-  background-color: #ddd;
-  color: black;
+nav a:hover {
+    background-color: #ddd;
+    color: black;
 }
 
-#navbar {
-  float: left;
-  margin-left: 10%;
-  margin-top: 10%;
-  position: absolute;
-}
-
-#navbar a {
-  padding-top: 3%;
-  padding-bottom: 3%;
-  color: #2D3833;
-  border: 2px solid #2D3833;
-  background-color: #E0E0E0;
-  border-radius: 25px;
-  font-size: 23px;
-  margin-bottom: 4%;
-}
-
-#navbar a:hover {
-  background-color: #485951;
-  color: #DCE5E0;
-}
-
-/* Changing colour of tab when it is selected. */
-#navbar a.active {
-  background-color: #ADB5B1;
-}
+.active {}
 
 h1 {
-  margin-left: 50%;
-  margin-top: 7%;
-  font-size: 64px;
-  color: #2D3833;
+    font-size: 64px;
+    color: #2D3833;
 }
 
 textarea {
-  resize: none;
+    resize: none;
 }
 
 #editaccount {
-  float: right;
-  margin-right: 30%;
-  margin-top: 2.5%;
+    margin-left: auto;
+    margin-right: auto;
+    width: 500px;
+    margin-top: 2.5%;
 }
 
 #editaccount div {
-  margin-top: 15px;
-  margin-bottom: 15px
+    margin-top: 15px;
+    margin-bottom: 15px
 }
 
 fieldset {
-  width: 45%;
-  border-radius: 10px;
-  border-color: #2D3833
+    width: 45%;
+    border-radius: 10px;
+    border-color: #2D3833
 }
 
 #commitchanges {
-  display: flex;
-  flex-direction: row;
-  align-content: space-between;
+    display: flex;
+    flex-direction: row;
+    align-content: space-between;
 }
 
 #commitchanges button {
-  font-size: 16px;
-  border: 2px solid #2D3833;
-  border-radius: 15px;
+    font-size: 16px;
+    border: 2px solid #2D3833;
+    border-radius: 15px;
 }
 
 #commitchanges button:hover {
-  transition-duration: 0.4s;
-  color: white;
-  background-color: #485951;
+    transition-duration: 0.4s;
+    color: white;
+    background-color: #485951;
 }
 
 #delete {
-  margin-left: auto;
+    margin-left: auto;
 }
