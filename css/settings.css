@@ -1,50 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Arvo&display=swap');
 
-header {
-    display: flex;
-    flex-direction: row;
-    align-content: space-between;
-    background-color: grey;
-    margin-top: auto;
-    margin-bottom: auto;
-    border-radius: 10px;
-}
-
-#searchbar {
-    font-size: 25px;
-    width: 200px;
-}
-
-nav {
-    display: flex;
-    flex-direction: row;
-}
-
-/* Setting tabs within next-page box to be on the right side. */
-a {
-    text-align: center;
-    display: block;
-    font-size: 26px;
-    font-weight: bold;
-    text-decoration: none;
-    border-radius: 25px;
-}
-
-a {}
-
-/* Changing colour of tabs when hovered over. */
-nav a:hover {
-    background-color: #ddd;
-    color: black;
-}
-
-.active {}
-
-h1 {
-    font-size: 64px;
-    color: #2D3833;
-}
-
 textarea {
     resize: none;
 }
@@ -53,11 +8,11 @@ textarea {
     margin-left: auto;
     margin-right: auto;
     width: 500px;
-    margin-top: 2.5%;
+    margin-top: 5%;
 }
 
 #editaccount div {
-    margin-top: 15px;
+    margin-top: 30px;
     margin-bottom: 15px
 }
 
@@ -65,6 +20,10 @@ fieldset {
     width: 45%;
     border-radius: 10px;
     border-color: #2D3833
+}
+
+fieldset div{
+  background-color: #dfdfdf;
 }
 
 #commitchanges {

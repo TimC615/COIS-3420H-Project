@@ -19,12 +19,10 @@
 		<div>
 			<h1>USERNAME</h1>
 		</div>
-		<div>
+		<div id="navsearch">
 			<form id="searchprofiles" action="#" method="post">
 				<input id="searchbar" type="text" placeholder="Search Profiles...">
 			</form>
-		</div>
-		<div>
 			<nav>
 				<a href="profile.html">Profile</a>
 				<a href="settings.html" class="active">Settings</a>
@@ -53,17 +51,19 @@
 		<!--Possibly display current descripton before a change occur-->
 		<div>
 			<label for="updatedesc">Descripton:</label><br />
-			<textarea name="updatedesc" rows="3" cols="50" maxlength="150"></textarea>
+			<textarea name="updatedesc" rows="10" cols="100" maxlength="600"></textarea>
 		</div>
 		<fieldset>
 			<legend>Profile Visibility</legend>
 			<div>
-				<input id="publicacc" type="radio" name="access" value="public" checked="checked">
-				<label for="publicacc">Public account</label>
-			</div>
-			<div>
-				<input id="privateacc" type="radio" name="access" value="private">
-				<label for="privateacc">Private account</label>
+				<div>
+					<input id="publicacc" type="radio" name="access" value="public" checked="checked">
+					<label for="publicacc">Public account</label>
+				</div>
+				<div>
+					<input id="privateacc" type="radio" name="access" value="private">
+					<label for="privateacc">Private account</label>
+				</div>
 			</div>
 		</fieldset>
 		<!--implement javascript compatibility for confirmation popup-->

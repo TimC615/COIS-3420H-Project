@@ -7,3 +7,68 @@ body {
   background-size: cover;
   font-family: 'Arvo', serif;
 }
+
+header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    border-radius: 10px;
+    background-color: rgba(74, 74, 74, 0.6);
+    box-shadow: 0 5px 5px 5px rgb(50, 50, 50);
+}
+
+header div{
+  align-self: center;
+}
+
+#searchbar {
+    font-size: 25px;
+    width: 200px;
+}
+
+#navsearch{
+  display: flex;
+  flex-direction: row;
+}
+
+#navsearch form{
+  margin-right: 40px;
+}
+
+nav {
+    display: flex;
+    flex-direction: row;
+}
+
+/* Setting tabs within next-page box to be on the right side. */
+a {
+    text-align: center;
+    display: block;
+    font-size: 26px;
+    font-weight: bold;
+    text-decoration: none;
+    border-radius: 25px;
+}
+
+nav a{
+  margin-left: 10px;
+  margin-right: 10px;
+  background-color: #2D3833;
+  color: white;
+}
+
+/* Changing colour of tabs when hovered over. */
+nav a:hover {
+    background-color: white;
+    color: #2D3833;
+}
+
+.active {
+  background-color: #111513;
+  color: #B9B9B9;
+}
+
+h1 {
+    font-size: 64px;
+    color: #2D3833;
+}
