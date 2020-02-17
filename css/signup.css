@@ -1,0 +1,37 @@
+#signup{
+    display: flex;
+    flex-direction: column;
+    margin-top: 25px;
+}
+
+#signup div{
+    margin: 25px auto 25px auto;
+}
+
+#username{
+    display: flex;
+    flex-direction: row;
+}
+
+#username div{
+    margin-right: 15px;
+}
+
+#userinput{
+    display: flex;
+    flex-direction: column;
+}
+
+#passconfirm{
+    display: flex;
+    flex-direction: row;
+}
+
+#passconfirm div{
+    margin-right: 15px;
+}
+
+#passwords{
+    display: flex;
+    flex-direction: column;
+}

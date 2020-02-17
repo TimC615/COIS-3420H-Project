@@ -1,0 +1,9 @@
+#login{
+    display: flex;
+    flex-direction: column;
+    margin-top: 60px;
+}
+
+#login div{
+    margin: 25px auto 25px auto;
+}
