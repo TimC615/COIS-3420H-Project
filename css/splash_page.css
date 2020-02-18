@@ -1,0 +1,33 @@
+#mainbody{
+    margin-top: 40px;
+    width: 65%;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+p{
+    font-weight: bold;
+    font-size: 20px;
+}
+
+#profileslideshow{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.profilepreview img{
+    width: 450px;
+    height: 300px;
+    border: 2px solid black;
+}
+
+figcaption{
+    font-weight: bold;
+}
+
+figure a{
+    color: black;
+}
