@@ -31,6 +31,22 @@
         </div>
     </header>
 
+    <form id="editlistitem" action="#" method="post" enctype="multipart/form-data">
+        <div>
+			<!--Try to have the placeholder be whatever the user's current username is-->
+			<label for="updatename">Update task name:</label>
+			<input id="updatename" type="text" placeholder="Task name">
+		</div>
+
+        <div>
+			<label for="updatepic">Update task picture:</label><br />
+			<input type="file" name="updatepic" id="updatepic">
+		</div>
+        <div>
+			<label for="updatedesc">Descripton:</label><br />
+			<textarea name="updatedesc" rows="8" cols="100" maxlength="600"></textarea>
+		</div>
+    </form>
 </body>
 
 </html>

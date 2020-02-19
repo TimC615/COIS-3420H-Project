@@ -1,0 +1,17 @@
+#profileinfo{
+    display: flex;
+    flex-direction: row;
+}
+
+#profileinfo img{
+    margin-right: auto;
+    margin-left: 50px;
+}
+
+#profileinfo p{
+    margin-right: 50px;
+    margin-left: auto;
+    font-weight: bold;
+    width: 50%;
+    margin-top: 85px;
+}
