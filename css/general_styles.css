@@ -63,6 +63,24 @@ nav a:hover {
     color: #2D3833;
 }
 
+nav button{
+    text-align: center;
+    display: block;
+    font-size: 26px;
+    font-weight: bold;
+    text-decoration: none;
+    border-radius: 25px;
+    margin-left: 10px;
+    margin-right: 10px;
+    background-color: #2D3833;
+    color: white;
+    border: none;
+}
+
+nav button:hover{
+    background-color: white;
+    color: #2D3833;
+}
 .active {
   background-color: #111513;
   color: #B9B9B9;

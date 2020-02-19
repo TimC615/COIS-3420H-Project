@@ -1,3 +1,7 @@
+#maincontent{
+    margin-top: 50px;
+}
+
 #profileinfo{
     display: flex;
     flex-direction: row;
@@ -6,6 +10,8 @@
 #profileinfo img{
     margin-right: auto;
     margin-left: 50px;
+    border: 2px solid black;
+    border-radius: 10px;
 }
 
 #profileinfo p{
@@ -13,5 +19,78 @@
     margin-left: auto;
     font-weight: bold;
     width: 50%;
-    margin-top: 85px;
+    margin-top: auto;
+    margin-bottom: auto;
+    background-color: white;
+    padding: 5px 10px 5px 10px;
+    border: 2px solid black;
+    border-radius: 10px;
+}
+
+#profileinfo div{
+    display: flex;
+    flex-direction: column;
+    margin-right: 250px;
+}
+
+#profileinfo div a{
+    width: 50px;
+    margin-left: auto;
+    margin-right: 75px;
+    border: 2px solid black;
+    border-radius: 10px;
+    margin-bottom: 5px;
+    font-size: 20px;
+    color: black;
+    background-color: white;
+}
+
+#profileinfo div a:hover{
+    transition-duration: 0.4s;
+    color: white;
+    background-color: #485951;
+}
+
+h2{
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    font-weight: bold;
+    font-size: 35px;
+}
+
+#bucketlist{
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}
+
+#bucketlist a{
+    background-color: rgba(74, 74, 74, 0.6);
+    color: black;
+    border: 2px solid black;
+    margin-bottom: 10px;
+}
+
+#bucketlist a h3{
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+#maincontent button{
+    width: 150px;
+    margin-left: 45%;
+    border: 2px solid black;
+    border-radius: 10px;
+    margin-bottom: 5px;
+    font-size: 20px;
+    color: black;
+    background-color: white;
+}
+
+#maincontent button:hover{
+    transition-duration: 0.4s;
+    color: white;
+    background-color: #485951;
 }

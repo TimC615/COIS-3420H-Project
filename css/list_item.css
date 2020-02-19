@@ -1,0 +1,36 @@
+#maincontent{
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 45px;
+}
+
+#tasknameandpic{
+    display: flex;
+    flex-direction: row;
+}
+
+#tasknameandpic img{
+    margin-right: auto;
+    margin-left: 100px;
+    border: 2px solid black;
+    border-radius: 10px;
+}
+
+#tasknameandpic h2{
+    margin-right: auto;
+    margin-top: auto;
+    margin-bottom: auto;
+    font-weight: bold;
+    font-size: 40px;
+}
+
+#taskdescription{
+    margin-top: 55px;
+    background-color: white;
+    padding: 5px 10px 5px 10px;
+    border: 2px solid black;
+    border-radius: 10px;
+}

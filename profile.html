@@ -24,37 +24,49 @@
                 <input id="searchbar" type="text" placeholder="Search Profiles...">
             </form>
             <nav>
-                <a href="profile.html">Profile</a>
-                <a href="settings.html" class="active">Settings</a>
-                <a href="logout.html">Log Out</a>
+                <a href="profile.html" class="active">Profile</a>
+                <a href="settings.html">Settings</a>
+                <button onclick="logOut()">Log Out</button>
             </nav>
+            <script src="./js/general.js">
+            </script>
         </div>
     </header>
 
     <div id="maincontent">
         <div id="profileinfo">
-            <img src="./images/default_profile_picture.jpg" width="450" height="300" alt="Bucket List Website Logo">
-            <p> lectus sit amet est placerat in egestas erat imperdiet sed euismod nisi porta lorem mollis aliquam ut porttitor
-                leo a diam sollicitudin tempor id eu nisl nunc mi ipsum faucibus vitae aliquet nec ullamcorper sit amet risus
-                nullam eget felis eget nunc lobortis mattis aliquam faucibus purus in massa tempor nec feugiat nisl pretium
-                fusce id velit ut tortor pretium viverra suspendisse potenti nullam ac tortor vitae purus faucibus ornare
-                suspendisse sed nisi lacus sed viverra tellus in hac habitasse platea dictumst vestibulum rhoncus est pellentesque
-                elit ullamcorper dignissim cras tincidunt loborti
-            </p>
+            <img src="./images/default_profile_picture.jpg" width="400" height="250" alt="Bucket List Website Logo">
+            <div>
+                <a href="edit_list_item.html">Edit</a>
+                <p> lectus sit amet est placerat in egestas erat imperdiet sed euismod nisi porta lorem mollis aliquam ut porttitor
+                    leo a diam sollicitudin tempor id eu nisl nunc mi ipsum faucibus vitae aliquet nec ullamcorper sit amet risus
+                    nullam eget felis eget nunc lobortis mattis aliquam faucibus purus in massa tempor nec feugiat nisl pretium
+                    fusce id velit ut tortor pretium viverra suspendisse potenti nullam ac tortor vitae purus faucibus ornare
+                    suspendisse sed nisi lacus sed viverra tellus in hac habitasse platea dictumst vestibulum rhoncus est pellentesque
+                    elit ullamcorper dignissim cras tincidunt loborti
+                </p>
+            </div>
         </div>
 
-        <div id="bucketlistitems">
-            <form>
-                <select id="bucketlist" size="8">
-                    <option>
-                        <img src="./images/bucket_logo.png" width="75" height="75" alt="Task Item">
-                        <h2>TASK NAME</h2>
-                    </option>
-                    <option>Pear</option>
-                    <option>Banana</option>
-                    <option>Orange</option>
-                </select>
-            </form>
+        <h2>Bucket List Tasks</h2>
+        <button onclick="#">Random Task</button>
+        <div id="bucketlist">
+            <a href="list_item.html" class="list-group-item active">
+                <img class="bucketlistpicture" src="./images/default_task.png" width="80" height="80" alt="Bucket List Task Image">
+                <h3 class="bucketlisttitle">Task Name</h3>
+            </a>
+            <a href="list_item.html" class="list-group-item active">
+                <img class="bucketlistpicture" src="./images/default_task.png" width="80" height="80" alt="Bucket List Task Image">
+                <h3 class="bucketlisttitle">Task Name</h3>
+            </a>
+            <a href="list_item.html" class="list-group-item active">
+                <img class="bucketlistpicture" src="./images/default_task.png" width="80" height="80" alt="Bucket List Task Image">
+                <h3 class="bucketlisttitle">Task Name</h3>
+            </a>
+            <a href="list_item.html" class="list-group-item active">
+                <img class="bucketlistpicture" src="./images/default_task.png" width="80" height="80" alt="Bucket List Task Image">
+                <h3 class="bucketlisttitle">Task Name</h3>
+            </a>
         </div>
     </div>
 </body>
