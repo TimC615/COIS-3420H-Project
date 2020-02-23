@@ -43,6 +43,11 @@
 			<label for="updatepass">Update Password:</label>
 			<input id="updatepass" type="password" placeholder="Password">
 		</div>
+		<div>
+			<label for="confirmpass">Confirm New Password:</label>
+			<input id="confirmpass" type="password" placeholder="Password">
+		</div>
+
 		<!--Possibly display current profile image before a change occurs (like Discord)-->
 		<!--Possible image preview prior to submission-->
 		<!--No limits set on dimensions or byte size yet-->
@@ -71,8 +76,10 @@
 		<!--implement javascript compatibility for confirmation popup-->
 		<div id="commitchanges">
 			<button type="submit" id="submit" name="submit" class="centered">Save Changes</button>
-			<button type="button" id="delete" name="delete" onclick="alert('Are you sure?')" class="centered">Delete Account</button>
+			<button id="delete" name="delete" onclick="deleteConfirm()" class="centered">Delete Account</button>
 		</div>
+		<script src="./js/settings.js">
+		</script>
 	</form>
 </body>
 
