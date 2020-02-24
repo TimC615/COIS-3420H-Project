@@ -7,3 +7,15 @@
 #login div{
     margin: 25px auto 25px auto;
 }
+
+#login div button {
+    font-size: 16px;
+    border: 2px solid #2D3833;
+    border-radius: 15px;
+}
+
+#login div button:hover {
+    transition-duration: 0.4s;
+    color: white;
+    background-color: #485951;
+}

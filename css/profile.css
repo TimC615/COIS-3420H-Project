@@ -60,6 +60,8 @@ h2{
 }
 
 #bucketlist{
+    display: flex;
+    flex-direction: column;
     margin-top: 20px;
     margin-left: auto;
     margin-right: auto;
@@ -90,6 +92,19 @@ h2{
 }
 
 #maincontent button:hover{
+    transition-duration: 0.4s;
+    color: white;
+    background-color: #485951;
+}
+
+
+#bucketlist button{
+    width: 10%;
+    margin-left: auto;
+    margin-top: 20px;
+}
+
+#bucketlist button:hover{
     transition-duration: 0.4s;
     color: white;
     background-color: #485951;

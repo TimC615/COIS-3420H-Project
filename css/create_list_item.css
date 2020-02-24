@@ -7,6 +7,7 @@ textarea{
     flex-direction: column;
     text-align: center;
     margin-top: 60px;
+    align-items: center;
 }
 
 #createlistitem div{
@@ -16,4 +17,10 @@ textarea{
 
 label{
     font-weight: bold;
+}
+
+fieldset {
+    width: 150px;
+    border-radius: 10px;
+    border-color: #2D3833
 }
