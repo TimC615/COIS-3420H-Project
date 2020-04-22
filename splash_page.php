@@ -12,7 +12,7 @@
 <body>
     <header>
         <div>
-            <a href="splash_page.html">
+            <a href="splash_page.php">
                 <img src="./images/bucket_logo.png" width="150" height="150" alt="Bucket List Website Logo">
             </a>
         </div>
@@ -24,8 +24,8 @@
                 <input id="searchbar" type="text" placeholder="Search Profiles...">
             </form>
             <nav>
-                <a href="profile.html">Profile</a>
-                <a href="settings.html">Settings</a>
+                <a href="profile.php">Profile</a>
+                <a href="settings.php">Settings</a>
                 <button onclick="logOut()">Log Out</button>
             </nav>
             <script src="./js/general.js">
@@ -43,19 +43,19 @@
             <button class="profilesleft" onclick="plusDivs(-1)">&#10094;</button>
 
             <figure class="profilepreview">
-                <a href="profile.html">
+                <a href="profile.php">
                     <img src="./images/profile1.jpg" style="width:100">
                     <figcaption> USERNAME 1</figcaption>
                 </a>
             </figure>
             <figure class="profilepreview">
-                <a href="profile.html">
+                <a href="profile.php">
                     <img src="./images/profile2.jpg" style="width:100">
                     <figcaption> USERNAME 2</figcaption>
                 </a>
             </figure>
             <figure class="profilepreview">
-                <a href="profile.html">
+                <a href="profile.php">
                     <img src="./images/profile3.jpg" style="width:100">
                     <figcaption> USERNAME 3</figcaption>
                 </a>

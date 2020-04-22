@@ -12,7 +12,7 @@
 <body>
     <header>
         <div>
-            <a href="splash_page.html">
+            <a href="splash_page.php">
                 <img src="./images/bucket_logo.png" width="150" height="150" alt="Bucket List Website Logo">
             </a>
         </div>
@@ -24,8 +24,8 @@
                 <input id="searchbar" type="text" placeholder="Search Profiles...">
             </form>
             <nav>
-                <a href="profile.html" class="active">Profile</a>
-                <a href="settings.html">Settings</a>
+                <a href="profile.php" class="active">Profile</a>
+                <a href="settings.php">Settings</a>
                 <button onclick="logOut()">Log Out</button>
             </nav>
             <script src="./js/general.js">
@@ -54,26 +54,23 @@
             possibly 2 or 3 wide.
             uses horizontal space more efficiently-->
 
-            <button class="bucketlistedit" href="edit_list_item.html">Edit</button>
-            <a href="list_item.html" class="list-group-item active">
+            <button class="bucketlistedit" href="edit_list_item.php">Edit</button>
+            <a href="list_item.php" class="list-group-item active">
                 <img class="bucketlistpicture" src="./images/default_task.png" width="80" height="80" alt="Bucket List Task Image">
                 <h3 class="bucketlisttitle">Task Name</h3>
             </a>
 
-            <button class="bucketlistedit" href="edit_list_item.html">Edit</button>
-            <a href="list_item.html" class="list-group-item active">
+            <a href="list_item.php" class="list-group-item active">
                 <img class="bucketlistpicture" src="./images/default_task.png" width="80" height="80" alt="Bucket List Task Image">
                 <h3 class="bucketlisttitle">Task Name</h3>
             </a>
 
-            <button class="bucketlistedit" href="edit_list_item.html">Edit</button>
-            <a href="list_item.html" class="list-group-item active">
+            <a href="list_item.php" class="list-group-item active">
                 <img class="bucketlistpicture" src="./images/default_task.png" width="80" height="80" alt="Bucket List Task Image">
                 <h3 class="bucketlisttitle">Task Name</h3>
             </a>
 
-            <button class="bucketlistedit" href="edit_list_item.html">Edit</button>
-            <a href="list_item.html" class="list-group-item active">
+            <a href="list_item.php" class="list-group-item active">
                 <img class="bucketlistpicture" src="./images/default_task.png" width="80" height="80" alt="Bucket List Task Image">
                 <h3 class="bucketlisttitle">Task Name</h3>
             </a>
