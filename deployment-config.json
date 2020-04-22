@@ -1,0 +1,9 @@
+{
+    "type": "sftp",
+    "host": "loki.trentu.ca",
+    "username": "timothychaundy",
+    "password": "bartAms4",
+    "port": 22,
+    "remotePath": "/home/timothychaundy/public_html/3420/project",
+    "uploadOnSave": true
+}

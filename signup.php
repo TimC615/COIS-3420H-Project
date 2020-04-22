@@ -1,4 +1,9 @@
 <!DOCTYPE html>
+<?php
+session_start();
+?>
+
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -23,11 +28,6 @@
             <form id="searchprofiles" action="#" method="post">
                 <input id="searchbar" type="text" placeholder="Search Profiles...">
             </form>
-            <nav>
-                <a href="profile.php">Profile</a>
-                <a href="settings.php">Settings</a>
-                <button onclick="logOut()">Log Out</button>
-            </nav>
             <script src="./js/general.js">
             </script>
         </div>

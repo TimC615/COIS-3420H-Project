@@ -1,4 +1,9 @@
 <!DOCTYPE html>
+<?php
+session_start();
+?>
+
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -24,9 +29,21 @@
                 <input id="searchbar" type="text" placeholder="Search Profiles...">
             </form>
             <nav>
+                <?php
+                if(isset($_SESSION['user'])) {
+                ?>
                 <a href="profile.php">Profile</a>
                 <a href="settings.php">Settings</a>
                 <button onclick="logOut()">Log Out</button>
+                <?php
+                }
+                else{
+                    ?>
+                    <a href="login.php">Log In</a>
+                    <a href="signup.php">Sign Up</a>
+                    <?php
+                }
+                ?>
             </nav>
             <script src="./js/general.js">
             </script>
