@@ -18,7 +18,7 @@ $conn = new mysqli($servername, $username, $password, $dbname);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/splash_page.css">
     <link rel="stylesheet" href="css/general_styles.css">
-    <link rel="">
+    <script src="./js/general.js"></script>
 </head>
 
 <body>
@@ -52,7 +52,9 @@ $conn = new mysqli($servername, $username, $password, $dbname);
                 ?>
                 <a href="profile.php">Profile</a>
                 <a href="settings.php">Settings</a>
-                <button onclick="logOut()">Log Out</button>
+                <form method="post">
+                    <button type submit name = logout id='logout'>Log Out</button>
+                <form>
                 <?php
                 }
                 else{
@@ -63,8 +65,6 @@ $conn = new mysqli($servername, $username, $password, $dbname);
                 }
                 ?>
             </nav>
-            <script src="./js/general.js">
-            </script>
         </div>
     </header>
 
@@ -140,5 +140,11 @@ $conn = new mysqli($servername, $username, $password, $dbname);
         </script>
     </div>
 </body>
-
 </html>
+
+<?php
+if(isset($_POST['logout'])){
+    session_destroy();
+    header("Location: ./splash_page.php");
+}
+?>

@@ -81,9 +81,9 @@ if (isset($_POST['submit'])) {
                 echo "Passwords do not match";
             } else {
                 $user = $_POST['user'];
-                $query = "SELECT id FROM proj_users WHERE user = '$user";
+                $query = "SELECT * FROM proj_users WHERE user = '$user'";
                 $result = $conn->query($query);
-                if ($result != 0) {
+                if (mysqli_num_rows($result) != 0) {
                     echo "Someone already has that username";
                 } else {
                     $_SESSION['user'] = $_POST['user'];

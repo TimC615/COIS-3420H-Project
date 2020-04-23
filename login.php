@@ -42,11 +42,11 @@ $conn = new mysqli($servername, $username, $password, $dbname);
     <form id="login" action="#" method="post">
         <div>
             <img src="./images/default_profile_picture.jpg" width="50" height="50" alt="Default Profile Picture">
-            <input id="user" type="text" placeholder="Username">
+            <input id="user" type="text" name='user' placeholder="Username">
         </div>
         <div>
             <img src="./images/magnifying_glass.png" width="50" height="50" alt="Password Picture">
-            <input id="pass" type="password" placeholder="Password">
+            <input id="pass" type="password" name='pass' placeholder="Password">
         </div>
         <div>
             <input type="checkbox" id="passremember" name="passremember" value="remember">
@@ -59,7 +59,41 @@ $conn = new mysqli($servername, $username, $password, $dbname);
             <button type="submit" id="submit" name="submit" class="centered">Log In</button>
         </div>
     </form>
-
 </body>
-
 </html>
+
+<?php
+if(isset($_POST['submit'])){
+    if(isset($_POST['user'])){
+        if(isset($_POST['pass'])){
+            $user = $_POST['user'];
+
+    		$query = "SELECT pass FROM proj_users WHERE user = '$user'";
+    		$result = $conn->query($query);
+
+    		if (mysqli_num_rows($result) != 0) {
+                echo "username found ";
+    			//username found
+                $result = $result->fetch_assoc();
+
+                if(password_verify($_POST['pass'], $result['pass'])){
+                    //passwords match
+                    $_SESSION['user'] = $user;
+
+                    header("Location: ./splash_page.php");
+                }
+                else{
+                    echo "passwords do not match";
+                }
+    		}
+        }
+        else{
+            echo "No password entered";
+            //do stuff if no password is entered
+        }
+    }
+    else{
+        echo "No username entered";
+    }
+}
+?>

@@ -55,15 +55,15 @@ $conn = new mysqli($servername, $username, $password, $dbname);
 		<div>
 			<!--Try to have the placeholder be whatever the user's current username is-->
 			<label for="updateuser">Update Username:</label>
-			<input id="updateuser" type="text" placeholder="<?php echo $result['user'] ?>"/>
+			<input id="updateuser" type="text" name='user' placeholder="<?php echo $result['user'] ?>"/>
 		</div>
 		<div>
 			<label for="pass1">Update Password:</label>
-			<input id="pass1" type="password" placeholder="Password">
+			<input id="pass1" type="password" name='pass1' placeholder="Password">
 		</div>
 		<div>
 			<label for="pass2">Confirm New Password:</label>
-			<input id="pass2"	 type="password" placeholder="Password">
+			<input id="pass2" type="password" name='pass2' placeholder="Password">
 		</div>
 
 		<!--Possibly display current profile image before a change occurs (like Discord)-->
@@ -118,5 +118,62 @@ $conn = new mysqli($servername, $username, $password, $dbname);
 		</script>
 	</form>
 </body>
-
 </html>
+
+<?php
+if(isset($_POST['submit']){
+	if($_POST['user'] != $_SESSION['user']){
+		$user = $_SESSION['user'];
+		$query = "SELECT id FROM proj_users WHERE user = '$user'";
+		$result = $conn->query($query);
+		if (mysqli_num_rows($result) != 0) {
+			echo "Someone already has that username";
+		}
+		else{
+		$newuser = $_POST['user'];
+		$_SESSION['user'] = $newuser;
+		$query = "UPDATE proj_users SET user='$newuser' WHERE user='$user'";
+		$conn->query($query);
+		}
+	}
+
+	if($_POST['pass1'] != "Password"){
+		if($_POST['pass1'] != $_POST['pass2']){
+			echo "New passwords do not match";
+		}
+		else{
+			$hash = password_hash($_POST['pass1'], PASSWORD_DEFAULT);
+			$query = "UPDATE proj_users SET pass='$hash' WHERE user='$user'";
+			$conn->query($query);
+		}
+	}
+
+	if($_POST['description'] != $result['description']){
+		$desc = $_POST['description'];
+		$query = "UPDATE proj_users SET description='$desc' WHERE user='$user'";
+		$conn->query($query);
+	}
+
+	if($_POST['access'] == public){
+		$access = 1;
+	}
+	else{
+		$access = 0;
+	}
+	$query = "UPDATE proj_users SET public='$access' WHERE user='$user'";
+	$conn->query($query);
+}
+
+if(isset($_GET['check'])){
+	if($_GET['check'] == true){
+		$id = $result['id'];
+		$user = $_SESSION['user'];
+		//$query = "DELETE FROM proj_tasks WHERE id='$id'";
+		//$conn->query($query);
+
+		//$query = "DELETE FROM proj_users WHERE user='$user'";
+		//$conn->query($query);
+		echo "Deletion Activated";
+	}
+}
+?>
