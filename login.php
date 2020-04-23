@@ -1,6 +1,12 @@
 <!DOCTYPE html>
 <?php
 session_start();
+
+$servername = "localhost";
+$username = "timothychaundy";
+$password = "MickeyMouse";
+$dbname = "timothychaundy";
+$conn = new mysqli($servername, $username, $password, $dbname);
 ?>
 
 <!DOCTYPE html>
@@ -22,17 +28,12 @@ session_start();
             </a>
         </div>
         <div>
-            <h1>USERNAME</h1>
+            <h1>Welcome!</h1>
         </div>
         <div id="navsearch">
             <form id="searchprofiles" action="#" method="post">
                 <input id="searchbar" type="text" placeholder="Search Profiles...">
             </form>
-            <nav>
-                <a href="profile.php">Profile</a>
-                <a href="settings.php">Settings</a>
-                <button onclick="logOut()">Log Out</button>
-            </nav>
             <script src="./js/general.js">
             </script>
         </div>
@@ -52,7 +53,7 @@ session_start();
             <label for="passremember"> Remember password</label>
         </div>
         <div>
-            <button type="button" id="passreset" name="passreset" onclick="#">Reset password</button>
+            <button type="button" id="passreset" name="passreset" onclick="">Reset password</button>
         </div>
         <div>
             <button type="submit" id="submit" name="submit" class="centered">Log In</button>

@@ -48,6 +48,32 @@ session_start();
 			<label for="updatepass">Update Password:</label>
 			<input id="updatepass" type="password" placeholder="Password">
 		</div>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/zxcvbn/4.2.0/zxcvbn.js">
+		var pass_strength={
+			0: "Very Bad",
+			1: "Bad",
+			2: "Weak",
+			3: "Average",
+			4: "Strong"
+		}
+		var pass = document.getElementById('pass1');
+		var pass_meter = document.getElementById('pass-strength');
+		var pass_text = document.getElementById('pass-strength-text');
+
+		pass.addEventListener('input', function()) {
+			var input = pass.value;
+			var result = zxcvbn(input);
+			pass_meter.value = result.score;
+
+			if(input !== ""){
+				pass_text.innerHTML = "Password Strength: " + strength[result.score];
+			}
+			else{
+				pass_text.innerHTML = "";
+			}
+		});
+
+		</script>
 		<div>
 			<label for="confirmpass">Confirm New Password:</label>
 			<input id="confirmpass" type="password" placeholder="Password">

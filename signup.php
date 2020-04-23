@@ -1,6 +1,12 @@
 <!DOCTYPE html>
 <?php
 session_start();
+
+$servername = "localhost";
+$username = "timothychaundy";
+$password = "MickeyMouse";
+$dbname = "timothychaundy";
+$conn = new mysqli($servername, $username, $password, $dbname);
 ?>
 
 <!DOCTYPE html>
@@ -12,6 +18,8 @@ session_start();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/signup.css">
     <link rel="stylesheet" href="css/general_styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/zxcvbn/4.2.0/zxcvbn.js"></script>
+    <script src="./js/signup.js"></script>
 </head>
 
 <body>
@@ -22,7 +30,7 @@ session_start();
             </a>
         </div>
         <div>
-            <h1>USERNAME</h1>
+            <h1>Welcome!</h1>
         </div>
         <div id="navsearch">
             <form id="searchprofiles" action="#" method="post">
@@ -50,6 +58,10 @@ session_start();
             <div id="passwords">
                 <h2>Password</h2>
                 <input id="pass1" type="password" placeholder="Password">
+                <div>
+                    <meter max='4' id='pass-strength'></meter>
+                    <p id='pass-strength-text'> </p>
+                </div>
                 <h2>Confirm Password</h2>
                 <input id="pass2" type="password" placeholder="Password">
             </div>
@@ -62,3 +74,14 @@ session_start();
 </body>
 
 </html>
+
+<?php
+if(isset($_POST['submit'])){
+    if($_POST['pass1'] !== $_POST['pass2']){
+
+    }
+    else{
+        $_SESSION['user'] = $_POST['user'];
+    }
+}
+?>
