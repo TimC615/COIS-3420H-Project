@@ -84,12 +84,12 @@ $conn = new mysqli($servername, $username, $password, $dbname);
             {
                 $query2 = "SELECT * FROM proj_tasks WHERE id = row1['id'] ORDER BY rand() LIMIT 1";
                 $result2 = $conn->query($sql2);
-
+                $count = 1;
                 while ($row2 = $result2->fetch_assoc())
                 {
                 ?>
                 <figure class="profilepreview">
-                    <a href="profile.php">
+                    <div id='profile'+count>
                         <?php
                         if($row2['image'] == null){
                         ?>
@@ -104,9 +104,31 @@ $conn = new mysqli($servername, $username, $password, $dbname);
                         }
                         ?>
                         <figcaption><?php echo $row['user'] ?></figcaption>
-                    </a>
+
+                        <div id='modal'+count class='modal'>
+                            <div class='modal_data'>
+                                <span class="close">&times;</span>
+                                <h3><?php echo row2['title'] ?></h3>
+                                <?php
+                                if($row2['image'] == null){
+                                ?>
+                                    <img src="./images/profile1.jpg" style="width:100">
+                                <?php
+                                }
+                                else{
+                                    //use the user provided image here!!!!!!!
+                                ?>
+                                    <img src="./images/profile1.jpg" style="width:100">
+                                <?php
+                                }
+                                ?>
+                                <p><?php echo row2['description'] ?></p>
+                            </div>
+                        </div>
+                    </div>
                 </figure>
             <?php
+            $count = $count + 1;
                 }
             }
             ?>

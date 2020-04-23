@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <?php
 session_start();
 
@@ -19,7 +18,7 @@ $conn = new mysqli($servername, $username, $password, $dbname);
     <link rel="stylesheet" href="css/signup.css">
     <link rel="stylesheet" href="css/general_styles.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/zxcvbn/4.2.0/zxcvbn.js"></script>
-    <script src="./js/signup.js"></script>
+    <script src="./js/pass_strength.js"></script>
 </head>
 
 <body>
@@ -48,7 +47,7 @@ $conn = new mysqli($servername, $username, $password, $dbname);
             </div>
             <div id="userinput">
                 <h2>Username</h2>
-                <input id="user" type="text" placeholder="Username">
+                <input id="user" name='user' type="text" placeholder="Username">
             </div>
         </div>
         <div id="passconfirm">
@@ -57,31 +56,50 @@ $conn = new mysqli($servername, $username, $password, $dbname);
             </div>
             <div id="passwords">
                 <h2>Password</h2>
-                <input id="pass1" type="password" placeholder="Password">
+                <input id="pass1" name='pass1' type="password" placeholder="Password">
                 <div>
                     <meter max='4' id='pass-strength'></meter>
                     <p id='pass-strength-text'> </p>
                 </div>
                 <h2>Confirm Password</h2>
-                <input id="pass2" type="password" placeholder="Password">
+                <input id="pass2" name='pass2' type="password" placeholder="Password">
             </div>
         </div>
         <div>
             <button type="submit" id="submit" name="submit" class="centered">Submit</button>
         </div>
     </form>
-
 </body>
 
 </html>
 
 <?php
-if(isset($_POST['submit'])){
-    if($_POST['pass1'] !== $_POST['pass2']){
+if (isset($_POST['submit'])) {
+    if (isset($_POST['user'])) {
+        if (isset($_POST['pass1']) && isset($_POST['pass2'])) {
+            if ($_POST['pass1'] !== $_POST['pass2']) {
+                echo "Passwords do not match";
+            } else {
+                $user = $_POST['user'];
+                $query = "SELECT id FROM proj_users WHERE user = '$user";
+                $result = $conn->query($query);
+                if ($result != 0) {
+                    echo "Someone already has that username";
+                } else {
+                    $_SESSION['user'] = $_POST['user'];
 
-    }
-    else{
-        $_SESSION['user'] = $_POST['user'];
+                    $hash = password_hash($_POST['pass1'], PASSWORD_DEFAULT);
+                    $query = "INSERT INTO proj_users (user, pass, public) VALUES ('$user', '$hash', 0)";
+                    $conn->query($query);
+
+                    header("Location: ./splash_page.php");
+                }
+            }
+        } else {
+            echo "You must enter a value for both password fields";
+        }
+    } else {
+        echo "No username entered";
     }
 }
 ?>

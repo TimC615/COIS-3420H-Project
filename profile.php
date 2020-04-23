@@ -53,7 +53,7 @@ session_start();
         </div>
 
         <h2>Bucket List Tasks</h2>
-        <button onclick="#">Random Task</button>
+        <button onclick="#">Create Task</button>
         <div id="bucketlist">
             <!--show the tasks in a grid pattern instead.
             possibly 2 or 3 wide.

@@ -15,8 +15,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
         var result = zxcvbn(input);
         pass_meter.value = result.score;
 
-        if (input !== "") {
-            pass_text.innerHTML = "Password Strength: " + strength[result.score];
+        if (input != "") {
+            pass_text.innerHTML = "Password Strength: " + pass_strength[result.score];
         } else {
             pass_text.innerHTML = "";
         }
