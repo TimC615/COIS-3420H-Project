@@ -22,6 +22,7 @@ if($_SESSION['online'] == null){
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/profile.css">
     <link rel="stylesheet" href="css/general_styles.css">
+    <script src="./js/general.js"></script>
 </head>
 
 <body>
@@ -36,40 +37,59 @@ if($_SESSION['online'] == null){
         </div>
         <div id="navsearch">
             <form id="searchprofiles" action="#" method="post">
-                <input id="searchbar" type="text" placeholder="Search Profiles...">
+                <button id="random">Go to a Random Task</button>
             </form>
             <nav>
                 <a href="profile.php" class="active">Profile</a>
                 <a href="settings.php">Settings</a>
-                <button onclick="logOut()">Log Out</button>
+                <form method="post">
+                    <button type='submit' name='logout' id='logout'>Log Out</button>
+                <form>
             </nav>
-            <script src="./js/general.js">
-            </script>
         </div>
     </header>
 
+    <?php
+    $user = $_SESSION['user'];
+    $query = "SELECT * FROM proj_users WHERE user = '$user'";
+    $result = $conn->query($query);
+    $result = $result->fetch_assoc();
+    ?>
+
     <div id="maincontent">
         <div id="profileinfo">
+            <h2>POSSIBLY REMOVE PICTURE</h2>
             <img src="./images/default_profile_picture.jpg" width="400" height="250" alt="Bucket List Website Logo">
             <div>
-                <p> lectus sit amet est placerat in egestas erat imperdiet sed euismod nisi porta lorem mollis aliquam ut porttitor
-                    leo a diam sollicitudin tempor id eu nisl nunc mi ipsum faucibus vitae aliquet nec ullamcorper sit amet risus
-                    nullam eget felis eget nunc lobortis mattis aliquam faucibus purus in massa tempor nec feugiat nisl pretium
-                    fusce id velit ut tortor pretium viverra suspendisse potenti nullam ac tortor vitae purus faucibus ornare
-                    suspendisse sed nisi lacus sed viverra tellus in hac habitasse platea dictumst vestibulum rhoncus est pellentesque
-                    elit ullamcorper dignissim cras tincidunt loborti
-                </p>
+                <p><?php echo $result['description'] ?></p>
             </div>
         </div>
 
         <h2>Bucket List Tasks</h2>
-        <button href="create_list_item.php" onclick="#">Create Task</button>
+        <a href="create_list_item.php">Create Task</a>
         <div id="bucketlist">
-            <!--show the tasks in a grid pattern instead.
-            possibly 2 or 3 wide.
-            uses horizontal space more efficiently-->
+            <?php
+            $sql = "SELECT * FROM proj_users WHERE user='$user'";
+            $result = $conn->query($sql) or die($conn->error);
+            $result = $result->fetch_assoc();
+            $id = $result['id'];
 
-            <button class="bucketlistedit" href="edit_list_item.php">Edit</button>
+            $sql = "SELECT * FROM proj_tasks WHERE id='$id'";
+            $result = $conn->query($sql) or die($conn->error);
+
+            while ($row = $result->fetch_assoc())
+            {
+            ?>
+                <button class="bucketlistedit" href="edit_list_item.php?task_id=<?php echo $row['task_id'] ?>">Edit</button>
+                <a href="list_item.php?task_id=<?php echo $row['task_id'] ?>" class="list-group-item active">
+                    <img class="bucketlistpicture" src="<?php echo $row['image'] ?>" width="80" height="80" alt="Task Image">
+                    <h3 class="bucketlisttitle"><?php echo $row['title'] ?></h3>
+                </a>
+            <?php
+            }
+            ?>
+
+            <!--
             <a href="list_item.php" class="list-group-item active">
                 <img class="bucketlistpicture" src="./images/default_task.png" width="80" height="80" alt="Bucket List Task Image">
                 <h3 class="bucketlisttitle">Task Name</h3>
@@ -84,11 +104,8 @@ if($_SESSION['online'] == null){
                 <img class="bucketlistpicture" src="./images/default_task.png" width="80" height="80" alt="Bucket List Task Image">
                 <h3 class="bucketlisttitle">Task Name</h3>
             </a>
+            -->
 
-            <a href="list_item.php" class="list-group-item active">
-                <img class="bucketlistpicture" src="./images/default_task.png" width="80" height="80" alt="Bucket List Task Image">
-                <h3 class="bucketlisttitle">Task Name</h3>
-            </a>
         </div>
     </div>
 </body>

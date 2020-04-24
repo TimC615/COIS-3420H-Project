@@ -2,6 +2,12 @@
 <?php
 session_start();
 
+$servername = "localhost";
+$username = "timothychaundy";
+$password = "MickeyMouse";
+$dbname = "timothychaundy";
+$conn = new mysqli($servername, $username, $password, $dbname);
+
 if($_SESSION['online'] == null){
     $_SESSION['online'] = array();
 }
@@ -26,16 +32,28 @@ if($_SESSION['online'] == null){
             </a>
         </div>
         <div>
-            <h1>USERNAME</h1>
+            <?php
+            if(isset($_SESSION['user'])){
+            ?>
+            <h1><?php echo $_SESSION['user'] ?></h1>
+            <?php
+            }
+            else{
+            ?>
+            <h1>Welcome!</h1>
+            <?php
+            }?>
         </div>
         <div id="navsearch">
             <form id="searchprofiles" action="#" method="post">
-                <input id="searchbar" type="text" placeholder="Search Profiles...">
+                <button id="random">Go to a Random Task</button>
             </form>
             <nav>
                 <a href="profile.php">Profile</a>
                 <a href="settings.php">Settings</a>
-                <button onclick="logOut()">Log Out</button>
+                <form method="post">
+                    <button type='submit' name='logout' id='logout'>Log Out</button>
+                <form>
             </nav>
             <script src="./js/general.js">
             </script>
@@ -43,25 +61,33 @@ if($_SESSION['online'] == null){
     </header>
 
     <div id="maincontent">
+        <?php
+        if(isset($_GET['task_id'])){
+            $task_id = $_GET['task_id'];
+        }
+        else {
+            $sql = "SELECT id FROM proj_users WHERE online=1";
+            $result = $conn->query($sql) or die($conn->error);
+            $result = $result->fetch_assoc();
+            $id = $result['id'];
+
+            $sql = "SELECT task_id FROM proj_tasks WHERE id=$id AND public='1'";
+            $result = $conn->query($sql) or die($conn->error);
+            $result = $result->fetch_assoc();
+            $task_id = $result['task_id'];
+        }
+
+        $sql = "SELECT * FROM proj_tasks WHERE task_id='$task_id'";
+        $result = $conn->query($sql) or die($conn->error);
+        $result = $result->fetch_assoc();
+        ?>
         <div id="tasknameandpic">
-            <img src="./images/default_task.png" width="200" height="200" alt="Bucket List Website Logo">
-            <h2>BUCKET LIST ITEM</h2>
+            <img src="<?php echo $result['image'] ?>" width="200" height="200" alt="Task Image">
+            <h2><?php echo $result['title'] ?></h2>
         </div>
 
         <div id="taskdescription">
-            <p>lectus sit amet est placerat in egestas erat imperdiet sed euismod nisi porta lorem mollis aliquam ut porttitor
-                leo a diam sollicitudin tempor id eu nisl nunc mi ipsum faucibus vitae aliquet nec ullamcorper sit amet risus
-                nullam eget felis eget nunc lobortis mattis aliquam faucibus purus in massa tempor nec feugiat nisl pretium
-                fusce id velit ut tortor pretium viverra suspendisse potenti nullam ac tortor vitae purus faucibus ornare
-                suspendisse sed nisi lacus sed viverra tellus in hac habitasse platea dictumst vestibulum rhoncus est pellentesque
-                elit ullamcorper dignissim cras tincidunt loborti
-                lectus sit amet est placerat in egestas erat imperdiet sed euismod nisi porta lorem mollis aliquam ut porttitor
-                leo a diam sollicitudin tempor id eu nisl nunc mi ipsum faucibus vitae aliquet nec ullamcorper sit amet risus
-                nullam eget felis eget nunc lobortis mattis aliquam faucibus purus in massa tempor nec feugiat nisl pretium
-                fusce id velit ut tortor pretium viverra suspendisse potenti nullam ac tortor vitae purus faucibus ornare
-                suspendisse sed nisi lacus sed viverra tellus in hac habitasse platea dictumst vestibulum rhoncus est pellentesque
-                elit ullamcorper dignissim cras tincidunt loborti
-            </p>
+            <p><?php echo $result['description'] ?></p>
         </div>
     </div>
 </body>

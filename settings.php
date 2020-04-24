@@ -23,6 +23,8 @@ if($_SESSION['online'] == null){
 	<link rel="stylesheet" href="css/general_styles.css">
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/zxcvbn/4.2.0/zxcvbn.js"></script>
     <script src="./js/pass_strength.js"></script>
+    <script src="./js/settings.js"></script>
+    <script src="./js/general.js"></script>
 </head>
 
 <body>
@@ -37,15 +39,23 @@ if($_SESSION['online'] == null){
         </div>
         <div id="navsearch">
             <form id="searchprofiles" action="#" method="post">
-                <input id="searchbar" type="text" placeholder="Search Profiles...">
+                <button id="random">Go to a Random Task</button>
             </form>
             <nav>
                 <a href="profile.php">Profile</a>
                 <a href="settings.php" class="active">Settings</a>
-                <button onclick="logOut()">Log Out</button>
+                <?php
+                $user = $_SESSION['user'];
+                $query = "SELECT id FROM proj_users WHERE user = '$user'";
+        		$result = $conn->query($query);
+        		$result = $result->fetch_assoc();
+                ?>
+                <form method="post">
+                    <form method="post">
+                        <button type='submit' name='logout' id='logout'>Log Out</button>
+                    <form>
+                </form>
             </nav>
-            <script src="./js/general.js">
-            </script>
         </div>
     </header>
 
@@ -70,11 +80,10 @@ if($_SESSION['online'] == null){
 			<input id="pass2" type="password" name='pass2' placeholder="Password">
 		</div>
 
-		<!--Possibly display current profile image before a change occurs (like Discord)-->
-		<!--Possible image preview prior to submission-->
-		<!--No limits set on dimensions or byte size yet-->
 		<div>
-			<label for="updatepic">Update profile picture:</label><br />
+            <h3>Current Profile Picture</h3>
+            <img src="<?php echo $result['image'] ?>" style="width:100">
+			<label for="updatepic">Update profile picture:</label><br/>
 			<input type="file" name="updatepic" id="updatepic">
 		</div>
 		<!--Possibly display current descripton before a change occur-->
@@ -116,10 +125,36 @@ if($_SESSION['online'] == null){
 		<!--implement javascript compatibility for confirmation popup-->
 		<div id="commitchanges">
 			<button type="submit" id="submit" name="submit" class="centered">Save Changes</button>
-			<button id="delete" name="delete" onclick="deleteConfirm(<?php $user ?>)" class="centered">Delete Account</button>
+			<button id="delete" name="delete" onclick="doConfirm()" class="centered">Delete Account</button>
 		</div>
-		<script src="./js/settings.js">
-		</script>
+
+        <script>
+        function doConfirm() {
+            var id = "<?php echo $result['id'] ?>";
+            var ok = confirm("Are you sure you want to permanently delete your account?");
+            if (ok) {
+                if (window.XMLHttpRequest) {
+                    // code for IE7+, Firefox, Chrome, Opera, Safari
+                    xmlhttp = new XMLHttpRequest();
+                }
+                else {
+                    // code for IE6, IE5
+                    xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+                }
+
+                xmlhttp.onreadystatechange = function() {
+                    if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                        window.location = "remove.php";
+                    }
+                }
+
+                xmlhttp.open("GET", "remove.php");
+                // file name where delete code is written
+                xmlhttp.send();
+                window.location = "./remove.php";
+            }
+        }
+        </script>
 	</form>
 </body>
 </html>
@@ -176,20 +211,5 @@ if(isset($_POST['submit'])){
 	}
 	$query = "UPDATE proj_users SET public='$access' WHERE user='$user'";
 	$conn->query($query);
-}
-
-if(isset($_GET['check'])){
-	if($_GET['check'] == true){
-		$id = $result['id'];
-		$user = $_SESSION['user'];
-		//$query = "DELETE FROM proj_tasks WHERE id='$id'";
-		//$conn->query($query);
-
-		//$query = "DELETE FROM proj_users WHERE user='$user'";
-		//$conn->query($query);
-
-        header("Location: ./splash_page.php");
-        exit();
-	}
 }
 ?>

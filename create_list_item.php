@@ -31,16 +31,18 @@ if($_SESSION['online'] == null){
             </a>
         </div>
         <div>
-            <h1>USERNAME</h1>
+            <h1><?php echo $_SESSION['user'] ?></h1>
         </div>
         <div id="navsearch">
             <form id="searchprofiles" action="#" method="post">
-                <input id="searchbar" type="text" placeholder="Search Profiles...">
+                <button id="random">Go to a Random Task</button>
             </form>
             <nav>
                 <a href="profile.php">Profile</a>
                 <a href="settings.php">Settings</a>
-                <button onclick="logOut()">Log Out</button>
+                <form method="post">
+                    <button type='submit' name='logout' id='logout'>Log Out</button>
+                <form>
             </nav>
             <script src="./js/general.js">
             </script>
@@ -66,11 +68,11 @@ if($_SESSION['online'] == null){
 			<div>
 				<div>
 					<input id="publicacc" type="radio" name="access" value="public">
-					<label for="publicacc">Public account</label>
+					<label for="publicacc">Public Task</label>
 				</div>
 				<div>
 					<input id="privateacc" type="radio" name="access" value="private" checked="checked">
-					<label for="privateacc">Private account</label>
+					<label for="privateacc">Private Task</label>
 				</div>
 			</div>
 		</fieldset>
@@ -103,19 +105,15 @@ if(isset($_POST['submit'])){
             $desc = "";
         }
 
-        var_dump($_FILES);
-        //var_dump($_FILES['file']);
-        //echo $_FILES['file']['name'];
-
         if(isset($_FILES['file']['name'])){
-            $file = $_FILES['file']['name'];
             $user = $_SESSION['user'];
+            $file = $user . "_" . $_FILES['file']['name'];
 
             $check = $_FILES['file']['size'];
             if($check <= 0){
                 echo "File uploaded is not an image";
-                $file = "default_task.png";
-                $path = "./images/default_task.png";
+                $file = $user . "_default_task.png";
+                $path = "./images/" . $user .  "_default_task.png";
             }
 
             // Allow certain file formats
@@ -123,11 +121,11 @@ if(isset($_POST['submit'])){
 
             if($file_type != "jpg" && $file_type != "png" && $file_type != "jpeg") {
                     echo "File inputted is not a JPG, PNG, or JPEG file";
-                    $file = "default_task.png";
+                    $file = $user . "_default_task.png";
             }
         }
         else{
-            $file = "default_task.png";
+            $file = $user . "_default_task.png";
         }
 
         if($_POST['access'] == 'public'){
@@ -137,13 +135,22 @@ if(isset($_POST['submit'])){
     		$access = 0;
     	}
         $user = $_SESSION['user'];
-        $query1 = "SELECT id FROM proj_users WHERE user = '$user'";
+        $query1 = "SELECT * FROM proj_users WHERE user = '$user'";
         $result = $conn->query($query1);
+        var_dump($result);
         $result = $result->fetch_assoc();
+        var_dump($result);
         $id = $result['id'];
+        echo $id;
 
-        //$query2 = "INSERT INTO proj_tasks (id, title, image, description, public) VALUES ('$id', '$title', '$file', '$desc', '$access')";
-        //$result = $conn->query($query2);
+        $query2 = "INSERT INTO proj_tasks (id, title, image, description, public) VALUES ('$id', '$title', '$file', '$desc', '$access')";
+        //$conn->query($query2);
+        if ($conn->query($query2) === TRUE) {
+            echo "New record created successfully";
+        }
+        else {
+            echo "Error: " . $query2 . "<br>" . $conn->error;
+        }
 
         // Check if file already exists
         if (file_exists('/~timothychaundy/www_data/' . $file)) {
@@ -151,20 +158,13 @@ if(isset($_POST['submit'])){
         }
         else{
             if(is_uploaded_file($_FILES['file']['tmp_name'])){
-                $newname = createFilename('file', '');
+                $newname = createFilename('file', '$file');
+                checkAndMoveFile('file', 10240, $newname);
             }
             move_uploaded_file($_FILES['file']['tmp_name'], '/~timothychaundy/www_data/' . $_FILES['file']['name']);
         }
-
-        echo $id;
-        echo "\n";
-        echo $title;
-        echo "\n";
-        echo $desc;
-        echo "\n";
-        echo $path;
-        echo "\n";
-        echo $access;
+        //header("Location: ./profile.php");
+        //exit();
     }
     else{
         echo "No task name provided";

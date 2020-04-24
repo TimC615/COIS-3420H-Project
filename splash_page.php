@@ -48,7 +48,7 @@ if($_SESSION['online'] == null){
         </div>
         <div id="navsearch">
             <form id="searchprofiles" action="#" method="post">
-                <input id="searchbar" type="text" placeholder="Search Profiles...">
+                <button id="random" onclick="return random()">Go to a Random Task</button>
             </form>
             <nav>
                 <?php
@@ -57,7 +57,7 @@ if($_SESSION['online'] == null){
                 <a href="profile.php">Profile</a>
                 <a href="settings.php">Settings</a>
                 <form method="post">
-                    <button type submit name = logout id='logout'>Log Out</button>
+                    <button type='submit' name='logout' id='logout'>Log Out</button>
                 <form>
                 <?php
                 }
@@ -81,54 +81,34 @@ if($_SESSION['online'] == null){
         <div id="profileslideshow">
             <button class="profilesleft" onclick="plusDivs(-1)">&#10094;</button>
             <?php
-            $sql1 = "SELECT * FROM proj_users WHERE public != 0, online != 0 ORDER BY rand() LIMIT 3";
-            $result1 = $conn->query($sql1);
+            $sql1 = "SELECT * FROM proj_users WHERE online = 1 ORDER BY rand() LIMIT 3";
+            $result1 = $conn->query($sql1) or die($conn->error);
 
             while ($row1 = $result1->fetch_assoc())
             {
-                $query2 = "SELECT * FROM proj_tasks WHERE id = row1['id'] ORDER BY rand() LIMIT 1";
-                $result2 = $conn->query($sql2);
+                $id = $row1['id'];
+                $sql2 = "SELECT * FROM proj_tasks WHERE id = $id ORDER BY RAND() LIMIT 1";
+                $result2 = $conn->query($sql2) or die($conn->error);
                 $count = 1;
                 while ($row2 = $result2->fetch_assoc())
                 {
                 ?>
                 <figure class="profilepreview">
-                    <div id='profile'+count>
-                        <?php
-                        if($row2['image'] == null){
-                        ?>
-                            <img src="./images/profile1.jpg" style="width:100">
-                        <?php
-                        }
-                        else{
-                            //use the user provided image here!!!!!!!
-                        ?>
-                            <img src="./images/profile1.jpg" style="width:100">
-                        <?php
-                        }
-                        ?>
-                        <figcaption><?php echo $row['user'] ?></figcaption>
-
-                        <div id='modal'+count class='modal'>
-                            <div class='modal_data'>
+                    <div id="'profile'+count">
+                        <button id="myBtn" class="open" value="<?php echo $row2['task_id'] ?>">
+                            <figcaption><?php echo $row2['title'] ?></figcaption>
+                            <img src="<?php echo $row2['image'] ?>" style="width:100">
+                        </button>
+                        <!--
+                        <div id="myModal" class='modal fade hide' display='none'>
+                            <div class='modal-content'>
                                 <span class="close">&times;</span>
-                                <h3><?php echo row2['title'] ?></h3>
-                                <?php
-                                if($row2['image'] == null){
-                                ?>
-                                    <img src="./images/profile1.jpg" style="width:100">
-                                <?php
-                                }
-                                else{
-                                    //use the user provided image here!!!!!!!
-                                ?>
-                                    <img src="./images/profile1.jpg" style="width:100">
-                                <?php
-                                }
-                                ?>
-                                <p><?php echo row2['description'] ?></p>
+                                <h3><?php echo $row2['title'] ?></h3>
+                                <img src="<?php echo $row2['image'] ?>" style="width:100">
+                                <p><?php echo $row2['description'] ?></p>
                             </div>
                         </div>
+                        -->
                     </div>
                 </figure>
             <?php
@@ -143,10 +123,6 @@ if($_SESSION['online'] == null){
         <script src="./js/splash_page.js">
         </script>
     </div>
-
-    <?php
-    var_dump($_SESSION['online']);
-    ?>
 </body>
 </html>
 

@@ -36,12 +36,14 @@ if($_SESSION['online'] == null){
         </div>
         <div id="navsearch">
             <form id="searchprofiles" action="#" method="post">
-                <input id="searchbar" type="text" placeholder="Search Profiles...">
+                <button id="random">Go to a Random Task</button>
             </form>
             <nav>
                 <a href="profile.php">Profile</a>
                 <a href="settings.php">Settings</a>
-                <button onclick="logOut()">Log Out</button>
+                <form method="post">
+                    <button type='submit' name='logout' id='logout'>Log Out</button>
+                <form>
             </nav>
             <script src="./js/general.js">
             </script>

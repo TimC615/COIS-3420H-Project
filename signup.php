@@ -37,7 +37,7 @@ if($_SESSION['online'] == null){
         </div>
         <div id="navsearch">
             <form id="searchprofiles" action="#" method="post">
-                <input id="searchbar" type="text" placeholder="Search Profiles...">
+                <button id="random">Go to a Random Task</button>
             </form>
             <script src="./js/general.js">
             </script>
@@ -93,8 +93,8 @@ if (isset($_POST['submit'])) {
                     $_SESSION['user'] = $_POST['user'];
 
                     $hash = password_hash($_POST['pass1'], PASSWORD_DEFAULT);
-                    $query = "INSERT INTO proj_users (user, pass, public) VALUES ('$user', '$hash', 0)";
-                    $conn->query($query);
+                    $query = "INSERT INTO proj_users (user, pass, public, online) VALUES ('$user', '$hash', 0, 1)";
+                    $conn->query($query) or die($conn->error);
                     array_push($_SESSION['online'], $user);
                     $query = "UPDATE pass SET online = 1 WHERE user = '$user'";
             		$conn->query($query);
