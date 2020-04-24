@@ -100,7 +100,7 @@ if(isset($_POST['logout'])){
     $index = array_search($user, $_SESSION['online']);
     array_splice($_SESSION['online'], $index, 1);
 
-    $hour = time() — 3600 *24 * 30;
+    $hour = time() - 3600 *24 * 30;
     setcookie(‘username’, “”, $hour);
 
     $query = "UPDATE pass SET online = 0 WHERE user = '$user'";
