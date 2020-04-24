@@ -115,12 +115,13 @@ if($_SESSION['online'] == null){
 </html>
 <?php
 if(isset($_POST['logout'])){
-    unset($_SESSION['user']);
+    $user=$_SESSION['user'];
     $index = array_search($user, $_SESSION['online']);
     array_splice($_SESSION['online'], $index, 1);
 
+    unset($_SESSION['user']);
     $hour = time() - 3600 *24 * 30;
-    setcookie(‘username’, “”, $hour);
+    setcookie("username", “”, $hour);
 
     $query = "UPDATE pass SET online = 0 WHERE user = '$user'";
     header("Location: ./splash_page.php");
