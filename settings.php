@@ -6,6 +6,10 @@ $username = "timothychaundy";
 $password = "MickeyMouse";
 $dbname = "timothychaundy";
 $conn = new mysqli($servername, $username, $password, $dbname);
+
+if($_SESSION['online'] == null){
+    $_SESSION['online'] = array();
+}
 ?>
 
 <!DOCTYPE html>
@@ -29,7 +33,7 @@ $conn = new mysqli($servername, $username, $password, $dbname);
             </a>
         </div>
         <div>
-            <h1>USERNAME</h1>
+            <h1><?php echo $_SESSION['user'] ?></h1>
         </div>
         <div id="navsearch">
             <form id="searchprofiles" action="#" method="post">
@@ -112,7 +116,7 @@ $conn = new mysqli($servername, $username, $password, $dbname);
 		<!--implement javascript compatibility for confirmation popup-->
 		<div id="commitchanges">
 			<button type="submit" id="submit" name="submit" class="centered">Save Changes</button>
-			<button id="delete" name="delete" onclick="deleteConfirm()" class="centered">Delete Account</button>
+			<button id="delete" name="delete" onclick="deleteConfirm(<?php $user ?>)" class="centered">Delete Account</button>
 		</div>
 		<script src="./js/settings.js">
 		</script>
@@ -121,7 +125,17 @@ $conn = new mysqli($servername, $username, $password, $dbname);
 </html>
 
 <?php
-if(isset($_POST['submit']){
+if(isset($_POST['logout'])){
+    unset($_SESSION['user']);
+    $index = array_search($user, $_SESSION['online']);
+    array_splice($_SESSION['online'], $index, 1);
+
+    $query = "UPDATE pass SET online = 0 WHERE user = '$user'";
+    header("Location: ./splash_page.php");
+    exit();
+}
+
+if(isset($_POST['submit'])){
 	if($_POST['user'] != $_SESSION['user']){
 		$user = $_SESSION['user'];
 		$query = "SELECT id FROM proj_users WHERE user = '$user'";
@@ -154,7 +168,7 @@ if(isset($_POST['submit']){
 		$conn->query($query);
 	}
 
-	if($_POST['access'] == public){
+	if($_POST['access'] == 'public'){
 		$access = 1;
 	}
 	else{
@@ -173,7 +187,9 @@ if(isset($_GET['check'])){
 
 		//$query = "DELETE FROM proj_users WHERE user='$user'";
 		//$conn->query($query);
-		echo "Deletion Activated";
+
+        header("Location: ./splash_page.php");
+        exit();
 	}
 }
 ?>

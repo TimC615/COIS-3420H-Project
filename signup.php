@@ -6,6 +6,10 @@ $username = "timothychaundy";
 $password = "MickeyMouse";
 $dbname = "timothychaundy";
 $conn = new mysqli($servername, $username, $password, $dbname);
+
+if($_SESSION['online'] == null){
+    $_SESSION['online'] = array();
+}
 ?>
 
 <!DOCTYPE html>
@@ -91,8 +95,11 @@ if (isset($_POST['submit'])) {
                     $hash = password_hash($_POST['pass1'], PASSWORD_DEFAULT);
                     $query = "INSERT INTO proj_users (user, pass, public) VALUES ('$user', '$hash', 0)";
                     $conn->query($query);
-
+                    array_push($_SESSION['online'], $user);
+                    $query = "UPDATE pass SET online = 1 WHERE user = '$user'";
+            		$conn->query($query);
                     header("Location: ./splash_page.php");
+                    exit();
                 }
             }
         } else {

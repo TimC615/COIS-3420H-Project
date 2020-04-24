@@ -7,6 +7,10 @@ $username = "timothychaundy";
 $password = "MickeyMouse";
 $dbname = "timothychaundy";
 $conn = new mysqli($servername, $username, $password, $dbname);
+
+if($_SESSION['online'] == null){
+    $_SESSION['online'] = array();
+}
 ?>
 
 <!DOCTYPE html>
@@ -79,8 +83,11 @@ if(isset($_POST['submit'])){
                 if(password_verify($_POST['pass'], $result['pass'])){
                     //passwords match
                     $_SESSION['user'] = $user;
-
+                    array_push($_SESSION['online'], $user);
+                    $query = "UPDATE pass SET online = 1 WHERE user = '$user'";
+            		$conn->query($query);
                     header("Location: ./splash_page.php");
+                    exit();
                 }
                 else{
                     echo "passwords do not match";

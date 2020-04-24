@@ -7,6 +7,10 @@ $username = "timothychaundy";
 $password = "MickeyMouse";
 $dbname = "timothychaundy";
 $conn = new mysqli($servername, $username, $password, $dbname);
+
+if($_SESSION['online'] == null){
+    $_SESSION['online'] = array();
+}
 ?>
 
 <!DOCTYPE html>
@@ -77,7 +81,7 @@ $conn = new mysqli($servername, $username, $password, $dbname);
         <div id="profileslideshow">
             <button class="profilesleft" onclick="plusDivs(-1)">&#10094;</button>
             <?php
-            $sql1 = "SELECT * FROM proj_users WHERE public != 0 ORDER BY rand() LIMIT 3";
+            $sql1 = "SELECT * FROM proj_users WHERE public != 0, online != 0 ORDER BY rand() LIMIT 3";
             $result1 = $conn->query($sql1);
 
             while ($row1 = $result1->fetch_assoc())
@@ -139,12 +143,21 @@ $conn = new mysqli($servername, $username, $password, $dbname);
         <script src="./js/splash_page.js">
         </script>
     </div>
+
+    <?php
+    var_dump($_SESSION['online']);
+    ?>
 </body>
 </html>
 
 <?php
 if(isset($_POST['logout'])){
-    session_destroy();
+    unset($_SESSION['user']);
+    $index = array_search($user, $_SESSION['online']);
+    array_splice($_SESSION['online'], $index, 1);
+
+    $query = "UPDATE pass SET online = 0 WHERE user = '$user'";
     header("Location: ./splash_page.php");
+    exit();
 }
 ?>

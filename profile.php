@@ -1,6 +1,16 @@
 <!DOCTYPE html>
 <?php
 session_start();
+
+$servername = "localhost";
+$username = "timothychaundy";
+$password = "MickeyMouse";
+$dbname = "timothychaundy";
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+if($_SESSION['online'] == null){
+    $_SESSION['online'] = array();
+}
 ?>
 
 <!DOCTYPE html>
@@ -22,7 +32,7 @@ session_start();
             </a>
         </div>
         <div>
-            <h1>USERNAME</h1>
+            <h1><?php echo $_SESSION['user'] ?></h1>
         </div>
         <div id="navsearch">
             <form id="searchprofiles" action="#" method="post">
@@ -53,7 +63,7 @@ session_start();
         </div>
 
         <h2>Bucket List Tasks</h2>
-        <button onclick="#">Create Task</button>
+        <button href="create_list_item.php" onclick="#">Create Task</button>
         <div id="bucketlist">
             <!--show the tasks in a grid pattern instead.
             possibly 2 or 3 wide.
@@ -84,3 +94,25 @@ session_start();
 </body>
 
 </html>
+<?php
+
+/*
+
+WHEN ADDING IN EDIT BUTTONS:
+- HAVE 1 EDIT BUTTON ENTERED FOR EACH TASK THE USER HAS
+- SET ALL EDIT BUTTONS TO HAVE THE SAME NAME (dont think ids matter much here, create an event handler for all buttons)
+- SET THE VALUE OF THE BUTTON TO THE TITLE OF EACH TASK, THEREFORE BEING ABLE TO DISPLAY THE INDEPENDENT TASK'S INFO ON SEPERATE WINDOW
+
+*/
+
+
+if(isset($_POST['logout'])){
+    unset($_SESSION['user']);
+    $index = array_search($user, $_SESSION['online']);
+    array_splice($_SESSION['online'], $index, 1);
+
+    $query = "UPDATE pass SET online = 0 WHERE user = '$user'";
+    header("Location: ./splash_page.php");
+    exit();
+}
+?>
