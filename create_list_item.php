@@ -57,7 +57,7 @@ if($_SESSION['online'] == null){
 
         <div>
 			<label for="updatepic">Task picture:</label><br />
-			<input type="file" name="file" id="file">
+			<input type="file" name="file" id="file" onchange="SavePhoto(this)">
 		</div>
         <div>
 			<label for="updatedesc">Descripton:</label><br />
@@ -88,6 +88,9 @@ if(isset($_POST['logout'])){
     unset($_SESSION['user']);
     $index = array_search($user, $_SESSION['online']);
     array_splice($_SESSION['online'], $index, 1);
+
+    $hour = time() — 3600 *24 * 30;
+    setcookie(‘username’, “”, $hour);
 
     $query = "UPDATE pass SET online = 0 WHERE user = '$user'";
     header("Location: ./splash_page.php");
@@ -143,7 +146,7 @@ if(isset($_POST['submit'])){
         $id = $result['id'];
         echo $id;
 
-        $query2 = "INSERT INTO proj_tasks (id, title, image, description, public) VALUES ('$id', '$title', '$file', '$desc', '$access')";
+        $query2 = "INSERT INTO proj_tasks (id, title, image, description, public, complete) VALUES ('$id', '$title', '$file', '$desc', '$access', 0)";
         //$conn->query($query2);
         if ($conn->query($query2) === TRUE) {
             echo "New record created successfully";

@@ -80,6 +80,12 @@ if($_SESSION['online'] == null){
         $sql = "SELECT * FROM proj_tasks WHERE task_id='$task_id'";
         $result = $conn->query($sql) or die($conn->error);
         $result = $result->fetch_assoc();
+
+        if($result['complete'] == 1){
+        ?>
+            <h2>This task was completed on <?php $result['completion_date'] ?></h2>
+        <?php
+        }
         ?>
         <div id="tasknameandpic">
             <img src="<?php echo $result['image'] ?>" width="200" height="200" alt="Task Image">
@@ -98,6 +104,9 @@ if(isset($_POST['logout'])){
     unset($_SESSION['user']);
     $index = array_search($user, $_SESSION['online']);
     array_splice($_SESSION['online'], $index, 1);
+
+    $hour = time() — 3600 *24 * 30;
+    setcookie(‘username’, “”, $hour);
 
     $query = "UPDATE pass SET online = 0 WHERE user = '$user'";
     header("Location: ./splash_page.php");

@@ -53,8 +53,8 @@ if($_SESSION['online'] == null){
             <input id="pass" type="password" name='pass' placeholder="Password">
         </div>
         <div>
-            <input type="checkbox" id="passremember" name="passremember" value="remember">
-            <label for="passremember"> Remember password</label>
+            <input type="checkbox" id="remember" name="remember">
+            <label for="remember"> Remember Me</label>
         </div>
         <div>
             <button type="button" id="passreset" name="passreset" onclick="">Reset password</button>
@@ -67,6 +67,12 @@ if($_SESSION['online'] == null){
 </html>
 
 <?php
+if(isset($_COOKIE['username'])){
+    $_SESSION['user'] = $_COOKIE['username'];
+    header("Location: ./splash_page.php");
+    exit();
+}
+
 if(isset($_POST['submit'])){
     if(isset($_POST['user'])){
         if(isset($_POST['pass'])){
@@ -86,6 +92,13 @@ if(isset($_POST['submit'])){
                     array_push($_SESSION['online'], $user);
                     $query = "UPDATE pass SET online = 1 WHERE user = '$user'";
             		$conn->query($query);
+
+                    if($_POST['remember'] == '1' || $_POST['remember'] == 'on') {
+                    $hour = time() + 3600 * 24 * 30;
+                    setcookie('username', $user, $hour);
+                    }
+
+
                     header("Location: ./splash_page.php");
                     exit();
                 }

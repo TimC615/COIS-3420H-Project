@@ -88,24 +88,6 @@ if($_SESSION['online'] == null){
             <?php
             }
             ?>
-
-            <!--
-            <a href="list_item.php" class="list-group-item active">
-                <img class="bucketlistpicture" src="./images/default_task.png" width="80" height="80" alt="Bucket List Task Image">
-                <h3 class="bucketlisttitle">Task Name</h3>
-            </a>
-
-            <a href="list_item.php" class="list-group-item active">
-                <img class="bucketlistpicture" src="./images/default_task.png" width="80" height="80" alt="Bucket List Task Image">
-                <h3 class="bucketlisttitle">Task Name</h3>
-            </a>
-
-            <a href="list_item.php" class="list-group-item active">
-                <img class="bucketlistpicture" src="./images/default_task.png" width="80" height="80" alt="Bucket List Task Image">
-                <h3 class="bucketlisttitle">Task Name</h3>
-            </a>
-            -->
-
         </div>
     </div>
 </body>
@@ -113,20 +95,13 @@ if($_SESSION['online'] == null){
 </html>
 <?php
 
-/*
-
-WHEN ADDING IN EDIT BUTTONS:
-- HAVE 1 EDIT BUTTON ENTERED FOR EACH TASK THE USER HAS
-- SET ALL EDIT BUTTONS TO HAVE THE SAME NAME (dont think ids matter much here, create an event handler for all buttons)
-- SET THE VALUE OF THE BUTTON TO THE TITLE OF EACH TASK, THEREFORE BEING ABLE TO DISPLAY THE INDEPENDENT TASK'S INFO ON SEPERATE WINDOW
-
-*/
-
-
 if(isset($_POST['logout'])){
     unset($_SESSION['user']);
     $index = array_search($user, $_SESSION['online']);
     array_splice($_SESSION['online'], $index, 1);
+
+    $hour = time() — 3600 *24 * 30;
+    setcookie(‘username’, “”, $hour);
 
     $query = "UPDATE pass SET online = 0 WHERE user = '$user'";
     header("Location: ./splash_page.php");
